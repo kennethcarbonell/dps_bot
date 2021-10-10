@@ -1,0 +1,12 @@
+**Best Fire Types by DPS**
+Pokemon	Fast Move	    Charged Move	    DPS	    TDO
+> Mega Blaziken	    Fire Spin	Blast Burn	22.715	650.5
+Mega Charizard Y	Fire Spin	Blast Burn	21.764	758
+Shadow Blaziken	    Fire Spin	Blast Burn	20.982	388
+Shadow Moltres	    Fire Spin	Overheat	19.532	491.5
+Shadow Charizard	Fire Spin	Blast Burn	19.253	420.7
+Shadow Entei	    Fire Fang	Overheat	19.076	545.8
+Mega Charizard X	Fire Spin	Blast Burn	18.807	657.9
+Reshiram	        Fire Fang	Overheat	18.075	623.7
+Mega Houndoom	    Fire Fang	Flamethrower 17.958	561.6
+Shadow Magmortar	Fire Spin	Fire Punch	17.771	376.7

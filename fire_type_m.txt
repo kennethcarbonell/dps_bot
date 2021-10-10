@@ -1,11 +1,11 @@
 **Best Fire Types by DPS**
-Pokemon
-> Mega Blaziken
-> Mega Charizard Y
-> Shadow Blaziken
-> Shadow Moltres
-> Shadow Charizard
-> Shadow Entei
-> Mega Charizard X
-> Reshiram
-> Mega Houndoom
+> **1.** Mega Blaziken
+> **2.** Mega Charizard Y
+> **3.** Shadow Blaziken
+> **4.** Shadow Moltres
+> **5.** Shadow Charizard
+> **6.** Shadow Entei
+> **7.** Mega Charizard X
+> **8.** Reshiram
+> **9.** Mega Houndoom
+> **10.** Shadow Magmortar
