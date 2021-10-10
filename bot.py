@@ -1,3 +1,4 @@
+from os import error
 import types
 import discord
 from discord.ext import commands
@@ -20,28 +21,26 @@ async def on_ready():
 
 @bot.command()
 async def dps(ctx, type):
-    for x in typesList:
-        if x == type:
-            count = 0
-            whole = ''
-            type = type.lower()
-            with open(type + "_type_m.txt", "r") as file:
-                while True:
-                    count += 1
-                    line = file.readline()
-                    whole += line
-                    
-                    if not line:
-                        break
-            file.close()
-            await ctx.send(whole)
-    await ctx.send(ctx.author.mention + ", you have entered an invalid Pokemon Type") #fix error handling
+    if type in typesList:
+        count = 0
+        whole = ''
+        type = type.lower()
+        with open(type + "_type_m.txt", "r") as file:
+            while True:
+                count += 1
+                line = file.readline()
+                whole += line
+                
+                if not line:
+                    break
+        file.close()
+        await ctx.send(whole)
+    else:
+        await dps_errors(ctx)
 
-#fix error handling, possible return types?
 @dps.error
-async def dps_error(ctx, error):
-    if isinstance(error, commands.BadArgument):
-        await ctx.send(ctx.author.mention + ", you have entered an invalid Pokemon Type")
+async def dps_errors(ctx):
+    await ctx.send(ctx.author.mention + ", you have entered an invalid Pokemon Type")
 
 # @bot.event
 # async def on_message(message):
