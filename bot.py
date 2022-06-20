@@ -1,3 +1,4 @@
+from dis import dis
 from os import error
 import types
 import discord
@@ -13,6 +14,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service
 from bs4 import BeautifulSoup 
 import time
+import os
 
 TOKEN = config('DISCORD_TOKEN')
 GENERAL_CH_TOKEN = config('general_ch_token')
@@ -32,11 +34,13 @@ async def on_ready():
 async def dps(ctx, type):
     gc = bot.get_channel(896176051200344097)
 
-    if type in typesList:
+    t = type.capitalize()
+
+    if t in typesList:
         button = '//*[@id="ui-uniqueSpecies"]/label'
         refresh = '//*[@id="refresher"]'
 
-        driver = webdriver.Chrome(service = Service('/Users/kennethcarbonell/Desktop/chromedriver'))
+        driver = webdriver.Chrome(service = Service('/usr/local/bin/chromedriver'))
         url = 'https://gamepress.gg/pokemongo/comprehensive-dps-spreadsheet'
         driver.get(url)
 
@@ -54,14 +58,45 @@ async def dps(ctx, type):
 
         list = []
 
+        poke_list = []
+        p = '/Users/kennethcarbonell/Documents/GitHub/dps_bot/pokemon_sprites'
+        files = []
+        for file in os.listdir(p):
+            if file.endswith('.png'):
+                files.append(file)
+
+        for i in files:
+            print(i)
+        
+        file = discord.File(p+'/Parasect.png')
+
         for i in range(10):
             mon = driver.find_element(By.XPATH, value = '//*[@id="ranking_table"]/tbody/tr[' + str(i+1) + ']/td[1]/span/a').text
-            list.append('> ' + mon)
+            
+            list.append('**{}. **'.format(i+1) + mon)
+            list.append(files[0])
             #append img and list
+
+        
+        # await gc.send(file = discord.File(files[0]))
 
         header = '**Best {} Type by DPS**'.format(type)
         await gc.send(header)
+
         await gc.send('\n'.join(list))
+
+        
+        # await gc.send('https://img.pokemondb.net/sprites/sword-shield/icon/charizard.png')
+        # await gc.send(list[1])
+        # await gc.send('https://img.pokemondb.net/sprites/sword-shield/icon/blaziken.png')
+        # await gc.send(list[2])]
+        # await gc.send('https://img.pokemondb.net/sprites/sword-shield/icon/kyogre.png')
+
+        await gc.send(file=file, content="sending this message as attachment")
+        # embed = discord.Embed(title="Hello, world!", description=":D", colour=0x87CEEB)
+        # embed.set_image(url='https://img.pokemondb.net/sprites/sword-shield/icon/charmander.png')
+        # embed.add_field(name="Charmander", value="https://img.pokemondb.net/sprites/sword-shield/icon/charmander.png", inline=False)
+        # await gc.send(embed=embed)
     else:
         await dps_errors(ctx)
 
@@ -79,11 +114,15 @@ async def spr(ctx):
     imgs = soup.find_all("span")
     imgs= imgs[8:-8]
 
-    # for img in imgs:
-    #     imglink = img.attrs.get("data-src")
-    #     print(imglink)
+    list = []
+    for img in imgs:
+        imglink = img.attrs.get("data-src")
+        list.append(imglink)
+        print(imglink)
 
-    await gc.send("https://img.pokemondb.net/sprites/sword-shield/icon/bulbasaur.png")
+    await gc.send(list[4])
+    await gc.send("Charmeleon")
+
         
     # https://img.pokemondb.net/sprites/sword-shield/icon/{pokemon name}
 
